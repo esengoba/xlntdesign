@@ -54,7 +54,7 @@ nav {
     margin:0;
     z-index: 100;
     position: fixed;
-    padding: 0 15%;
+    /*padding: 0 15%;*/
     background-color: rgba(0,0,0,.5);
 
 
@@ -67,7 +67,6 @@ nav {
     width: 100%;
     max-height: 100px;
     transition: all 0.2s ease-in-out;
-    padding: 0 15%;
     }
 
 .logo {
@@ -90,7 +89,7 @@ nav:after {
 
 /* Removing padding, margin and "list-style" from the "ul",
  * and adding "position:reltive" */
-nav ul {
+nav ul[role="main_menu"] {
 
     float: left;
     padding: 0;
@@ -99,11 +98,22 @@ nav ul {
     position: relative;
 
 }
+
+nav ul[role="social_media"] {
+
+    float: left;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+
+}
+
 /* Positioning the navigation items inline */
 nav ul li {
     margin: 0px;
     padding-top: 5px;
-
+    list-style: none;
     display:inline-block;
     float: left;
 
@@ -190,11 +200,12 @@ nav ul ul li:last-child, nav ul ul li:last-child a:hover{
         FOOTER
 ========================*/
 .main_footer{
-    top: -1px;
+    bottom: 0%;
     background-color: black;
     font-size: 12px;
     height: auto;
     color: white;
+    position: relative;
 
 }
 
