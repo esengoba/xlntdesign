@@ -177,23 +177,6 @@ nav ul ul li:last-child, nav ul ul li:last-child a:hover{
 
 }
 
-/*=======================
-        SUBTITLE
-========================*/
-
-.subtitle{
-    margin-top: 70px;
-    background-image: url("../imgs/guitarsorgan.jpg");
-    height: 100px;
-    color: white;
-    width: 100%;
-    border: 2px solid black;
-}
-
-.subtitle h2{
-    font-size: 40px;
-    padding: 4px 70px;
-}
 
 
 /*=======================
@@ -445,3 +428,36 @@ a.socialIcon:hover, .socialHoverClass {
 .social-circle i {
     color: #fff;
 }
+
+
+/***************************
+           LINK
+*************************** */
+
+.link_menu{
+    background-image: url("../imgs/guitarsorgan.jpg");
+    height: 20vh;
+    color: white;
+    width: 17%;
+    border: 2px solid black;
+    display: inline-block;
+    margin: 1%;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+}
+
+.link_menu:hover{
+    width: 17%;
+    height: 20vh;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.link_menu h2{
+    font-size: 25px;
+    padding: 8% 0;
+
+}
+
