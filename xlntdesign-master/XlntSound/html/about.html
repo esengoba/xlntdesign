@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="../css/index.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/flexbox.css"/>
+
+    <script src="jquery-3.2.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+
+    //Infinite scroll
+    <script>(function($) {
+
+    'use strict';
+
+    // Define the jscroll namespace and default settings
+    $.jscroll = {
+    defaults: {
+    debug: false,
+    autoTrigger: true,
+    autoTriggerUntil: false,
+    loadingHtml: '<small>Loading...</small>',
+    loadingFunction: false,
+    padding: 0,
+    nextSelector: 'a:last',
+    contentSelector: '',
+    pagingSelector: '',
+    callback: false
+    }
+    };
+
+    // Constructor
+    var jScroll = function($e, options) {
+
+    // Private vars and methods
+    var _data = $e.data('jscroll'),
+    _userOptions = (typeof options === 'function') ? { callback: options } : options,
+    _options = $.extend({}, $.jscroll.defaults, _userOptions, _data || {}),
+    _isWindow = ($e.css('overflow-y') === 'visible'),
+    _$next = $e.find(_options.nextSelector).first(),
+    _$window = $(window),
+    _$body = $('body'),
+    _$scroll = _isWindow ? _$window : $e,
+    _nextHref = $.trim(_$next.attr('href') + ' ' + _options.contentSelector),
+
+    // Check if a loading image is defined and preload
+    _preloadImage = function() {
+    var src = $(_options.loadingHtml).filter('img').attr('src');
+    if (src) {
+    var image = new Image();
+    image.src = src;
+    }
+    },
+
+    // Wrap inner content, if it isn't already
+    _wrapInnerContent = function() {
+    if (!$e.find('.jscroll-inner').length) {
+    $e.contents().wrapAll('<div class="jscroll-inner" />');
+    }
+    },
+
+    // Find the next link's parent, or add one, and hide it
+    _nextWrap = function($next) {
+    var $parent;
+    if (_options.pagingSelector) {
+    $next.closest(_options.pagingSelector).hide();
+    } else {
+    $parent = $next.parent().not('.jscroll-inner,.jscroll-added').addClass('jscroll-next-parent').hide();
+    if (!$parent.length) {
+    $next.wrap('<div class="jscroll-next-parent" />').parent().hide();
+    }
+    }
+    },
+
+    // Remove the jscroll behavior and data from an element
+    _destroy = function() {
+    return _$scroll.unbind('.jscroll')
+    .removeData('jscroll')
+    .find('.jscroll-inner').children().unwrap()
+    .filter('.jscroll-added').children().unwrap();
+    },
+
+    // Observe the scroll event for when to trigger the next load
+    _observe = function() {
+    if ($e.is(':visible')) {
+    _wrapInnerContent();
+    var $inner = $e.find('div.jscroll-inner').first(),
+    data = $e.data('jscroll'),
+    borderTopWidth = parseInt($e.css('borderTopWidth'), 10),
+    borderTopWidthInt = isNaN(borderTopWidth) ? 0 : borderTopWidth,
+    iContainerTop = parseInt($e.css('paddingTop'), 10) + borderTopWidthInt,
+    iTopHeight = _isWindow ? _$scroll.scrollTop() : $e.offset().top,
+    innerTop = $inner.length ? $inner.offset().top : 0,
+    iTotalHeight = Math.ceil(iTopHeight - innerTop + _$scroll.height() + iContainerTop);
+
+    if (!data.waiting && iTotalHeight + _options.padding >= $inner.outerHeight()) {
+    //data.nextHref = $.trim(data.nextHref + ' ' + _options.contentSelector);
+    _debug('info', 'jScroll:', $inner.outerHeight() - iTotalHeight, 'from bottom. Loading next request...');
+    return _load();
+    }
+    }
+    },
+
+    // Check if the href for the next set of content has been set
+    _checkNextHref = function(data) {
+    data = data || $e.data('jscroll');
+    if (!data || !data.nextHref) {
+    _debug('warn', 'jScroll: nextSelector not found - destroying');
+    _destroy();
+    return false;
+    } else {
+    _setBindings();
+    return true;
+    }
+    },
+
+    _setBindings = function() {
+    var $next = $e.find(_options.nextSelector).first();
+    if (!$next.length) {
+    return;
+    }
+    if (_options.autoTrigger && (_options.autoTriggerUntil === false || _options.autoTriggerUntil > 0)) {
+    _nextWrap($next);
+    var scrollingBodyHeight = _$body.height() - $e.offset().top,
+    scrollingHeight = ($e.height() < scrollingBodyHeight) ? $e.height() : scrollingBodyHeight,
+    windowHeight = ($e.offset().top - _$window.scrollTop() > 0) ? _$window.height() - ($e.offset().top - $(window).scrollTop()) : _$window.height();
+    if (scrollingHeight <= windowHeight) {
+    _observe();
+    }
+    _$scroll.unbind('.jscroll').bind('scroll.jscroll', function() {
+    return _observe();
+    });
+    if (_options.autoTriggerUntil > 0) {
+    _options.autoTriggerUntil--;
+    }
+    } else {
+    _$scroll.unbind('.jscroll');
+    $next.bind('click.jscroll', function() {
+    _nextWrap($next);
+    _load();
+    return false;
+    });
+    }
+    },
+
+    // Load the next set of content, if available
+    _load = function() {
+    var $inner = $e.find('div.jscroll-inner').first(),
+    data = $e.data('jscroll');
+
+    data.waiting = true;
+    $inner.append('<div class="jscroll-added" />')
+    .children('.jscroll-added').last()
+    .html('<div class="jscroll-loading" id="jscroll-loading">' + _options.loadingHtml + '</div>')
+    .promise()
+    .done(function(){
+    if (_options.loadingFunction) {
+    _options.loadingFunction();
+    }
+    });
+
+    return $e.animate({scrollTop: $inner.outerHeight()}, 0, function() {
+    var nextHref = data.nextHref;
+    $inner.find('div.jscroll-added').last().load(nextHref, function(r, status) {
+    if (status === 'error') {
+    return _destroy();
+    }
+    var $next = $(this).find(_options.nextSelector).first();
+    data.waiting = false;
+    data.nextHref = $next.attr('href') ? $.trim($next.attr('href') + ' ' + _options.contentSelector) : false;
+    $('.jscroll-next-parent', $e).remove(); // Remove the previous next link now that we have a new one
+    _checkNextHref();
+    if (_options.callback) {
+    _options.callback.call(this, nextHref);
+    }
+    _debug('dir', data);
+    });
+    });
+    },
+
+    // Safe console debug - http://klauzinski.com/javascript/safe-firebug-console-in-javascript
+    _debug = function(m) {
+    if (_options.debug && typeof console === 'object' && (typeof m === 'object' || typeof console[m] === 'function')) {
+    if (typeof m === 'object') {
+    var args = [];
+    for (var sMethod in m) {
+    if (typeof console[sMethod] === 'function') {
+    args = (m[sMethod].length) ? m[sMethod] : [m[sMethod]];
+    console[sMethod].apply(console, args);
+    } else {
+    console.log.apply(console, args);
+    }
+    }
+    } else {
+    console[m].apply(console, Array.prototype.slice.call(arguments, 1));
+    }
+    }
+    };
+
+    // Initialization
+    $e.data('jscroll', $.extend({}, _data, {initialized: true, waiting: false, nextHref: _nextHref}));
+    _wrapInnerContent();
+    _preloadImage();
+    _setBindings();
+
+    // Expose API methods via the jQuery.jscroll namespace, e.g. $('sel').jscroll.method()
+    $.extend($e.jscroll, {
+    destroy: _destroy
+    });
+    return $e;
+    };
+
+    // Define the jscroll plugin method and loop
+    $.fn.jscroll = function(m) {
+    return this.each(function() {
+    var $this = $(this),
+    data = $this.data('jscroll'), jscroll;
+
+    // Instantiate jScroll on this element if it hasn't been already
+    if (data && data.initialized) {
+    return;
+    }
+    jscroll = new jScroll($this, m);
+    });
+    };
+
+    })(jQuery);
+    </script>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+<style>
+    .studio
+    {
+        float: left;
+    }
+    .AboutStudio
+    {
+        text-align: center;
+        font-size: large;
+        margin: 0%;
+
+
+    }
+    .Scroll
+    {
+        position: center;
+    }
+
+</style>
+
+<body>
+
+<!------------------------------
+        NAVIGATION
+-------------------------------->
+<div class="row">
+    <nav class="col-12 activeColor" style="padding-left:20%;">
+        <label for="drop" class="toggle">Menu</label>
+        <input type="checkbox" id="drop"/>
+        <ul class="menu col-10">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="/html/about.html">About</a></li>
+            <li><!-- First Tier Drop Down -->
+                <a href="#">Services</a>
+                <ul>
+                    <li><a href="#">Music</a></li>
+                    <li><a href="#">Post Production</a></li>
+                </ul>
+            </li>
+            <div class="logo">Your Logo here</div>
+            <li>
+                <!-- First Tier Drop Down -->
+                <a href="#">Studio</a>
+                <ul>
+                    <li><a href="#">Mix Room</a></li>
+                    <li><a href="#">Tracking Room</a></li>
+                    <li><a href="#">Garage</a></li>
+                    <li><a href="#">Room</a></li>
+                    <li><a href="#">Room</a></li>
+                </ul>
+            </li>
+            <li>
+                <!-- First Tier Drop Down -->
+                <a href="#">Gear</a>
+                <ul>
+                    <li><a href="#">Outboard</a></li>
+                    <li><a href="#">Microphones</a></li>
+                    <li><a href="#">Instruments</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+
+        <ul class="social-network social-circle col-2">
+            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#" class="icoYouTube" title="YouTube"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#" class="icoSnapChat" title="SnapChat"><i class="fa fa-snapchat-ghost"></i></a></li>
+            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#" class="icoSoundCloud" title="SoundCloud"><i class="fa fa-soundcloud"></i></a></li>
+
+        </ul>
+
+
+    </nav>
+</div>
+
+<!------------------------------
+        SUBTITLE
+-------------------------------->
+<div class="row">
+    <div class="col-12 subtitle"> <!--FACEBOOK FEED-->
+        <h2>ABOUT</h2>
+
+
+    </div>
+</div>
+
+
+<!------------------------------
+        PAGE CONTENT
+-------------------------------->
+<div class="row">
+    <div class="container" style="min-height: 100vh;">
+
+
+        <div class="row" style="padding-bottom: 30px;">
+            <div class="col-12">
+                <img class ="studio" src="https://pbs.twimg.com/media/C8sGIyJVYAISusr.jpg" height="100%" width="50%">
+
+
+                <div class="col-6">
+                    <p class="AboutStudio"> Xlntsound studios is a state of the art studio facility located in the heart
+                        of Hollywood California just steps away from the strip.  We offer a full range
+                        of services including but not limited to recording, producing, mixing and mastering,
+                        as well as post production audio for film. Paragraphs. The class outputs text that has a certain
+                        number of paragraphs, separated by newlines. Within those paragraphs, there are random numbers of
+                        sentences. And within those sentences, there is a random number of words.Xlntsound studios is a state of the art studio facility located in the heart
+                        of Hollywood California just steps away from the strip.  We offer a full range
+                        of services including but not limited to recording, producing, mixing and mastering,
+                        as well as post production audio for film. Paragraphs. The class outputs text that has a certain
+                        number of paragraphs, separated by newlines. Within those paragraphs, there are random numbers of
+                        sentences. And within those sentences, there is a random number of words.</p>
+
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-12" id="about">
+                <img src="https://i.ytimg.com/vi/YwwE1LiIPeQ/maxresdefault.jpg" height="100%" width="100%">
+                <div>
+                <p class="AboutPerson"> Mariah Cowling is a great person! blah blah blah blah blah blah blah
+                    blahParagraphs. The class outputs text that has a certain number of paragraphs, separated by
+                    newlines. Within those paragraphs, there are random numbers of sentences. And within those sentences,
+                    there is a random number of words.</p>
+                </div>
+            </div>
+
+
+            <p>
+            <div class="col-12">
+                <h2>Second Title</h2>
+                content for second title goes here
+            </div>
+
+            <p>
+            <div class="col-12">
+                <h2>Second Title</h2>
+                content for second title goes here
+            </div>
+
+            <p>
+            <div class="col-12">
+                <h2>Second Title</h2>
+                content for second title goes here
+            </div>
+
+            <p>
+            <div class="col-12">
+                <h2>Second Title</h2>
+                content for second title goes here
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!------------------------------
+        FOOTER
+-------------------------------->
+<div class="row">
+    <footer class="main_footer col-12">
+        <div class="left_footer col-4">
+            <div class="logo">Your Logo here</div>
+            <br>
+            <p>
+            <h5>Address: </h5> 228 South Mills Ave, Claremont, CA, 91711 <br>
+            <h5>Contact: </h5> xlntsound@gmail.com
+            <h5>Copyright &copy; XlntSound.com 2014</h5>
+        </div>
+    </footer>
+
+
+</div>
+
+<!-- jQuery -->
+<script src="../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
