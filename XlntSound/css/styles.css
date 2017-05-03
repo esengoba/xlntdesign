@@ -50,22 +50,22 @@ nav {
     text-transform: uppercase;
     font-weight: 400;
     font-size: 20px;
-    width: 100%;
-    margin:0;
     z-index: 100;
     position: fixed;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding-left: 20%;
+    padding-right:20%;
     /*padding: 0 15%;*/
-    background-color: rgba(0,0,0,.5);
-
+    /*background-color: rgba(0,0,0,.5);*/
 
 }
 
 
 .activeColor {
     background-color: rgba(0,0,0,1);
-    z-index: 100;
-    width: 100%;
-    max-height: 100px;
+
     transition: all 0.2s ease-in-out;
     }
 
@@ -89,25 +89,13 @@ nav:after {
 
 /* Removing padding, margin and "list-style" from the "ul",
  * and adding "position:reltive" */
-nav ul[role="main_menu"] {
-
-    float: left;
+nav ul{
     padding: 0;
-    margin: 0;
+    margin:  0;
     list-style: none;
-    position: relative;
-
+    display: inline-block;
 }
 
-nav ul[role="social_media"] {
-
-    float: left;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    position: relative;
-
-}
 
 /* Positioning the navigation items inline */
 nav ul li {
@@ -183,29 +171,14 @@ nav ul ul li:last-child, nav ul ul li:last-child a:hover{
         FOOTER
 ========================*/
 .main_footer{
-    bottom: 0%;
+    padding: 0% 20%;
+    text-align: center;
+    margin-bottom: 0%;
     background-color: black;
     font-size: 12px;
-    height: auto;
+    height: auto ;
     color: white;
-    position: relative;
-
-}
-
-.left_footer{
-    margin: 1% 5%;
-    float: left;
-
-}
-
-p.left_footer {
-    text-align: left;
-    margin: 50% 5%;
-}
-.middle_footer{
-    text-align:  center;
-    vertical-align: middle;
-
+    position: absolute;
 
 }
 
@@ -347,7 +320,7 @@ ul.social-network {
     display: inline;
     margin-left: 0 !important;
     padding: 0;
-    float: right;
+
 }
 ul.social-network li {
     display: inline;
@@ -465,3 +438,20 @@ a.socialIcon:hover, .socialHoverClass {
 
 }
 
+/*=======================
+ -        SUBTITLE
+ ========================*/
+
+.subtitle{
+    margin-top: 70px;
+    background-image: url("../imgs/guitarsorgan.jpg");
+    height: 100px;
+    color: white;
+    width: 100%;
+    border: 2px solid black;
+}
+
+.subtitle h2{
+    font-size: 40px;
+    padding: 4px 70px;
+}
