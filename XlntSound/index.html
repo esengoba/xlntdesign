@@ -7,26 +7,24 @@
     <link type="text/css" rel="stylesheet" href="css/flexbox.css"  />
 
     <!-- Bootstrap Core CSS -->
-  <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!--W3schools -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-
 
 
 <body>
 
-<nav>
-   <label for="drop" class="toggle">Menu</label>
+<nav class="col-12 activeColor">
+    <label for="drop" class="toggle">Menu</label>
     <input type="checkbox" id="drop" />
     <ul>
         <li><a href="#">Home</a></li>
         <li><a href="html/about.html">About</a></li>
         <li><!-- First Tier Drop Down -->
-            <a href="#">Services</a>
+            <a href="html/services/services.html">Services</a>
             <ul>
                 <li><a href="#">Music</a></li>
                 <li><a href="#">Post Production</a></li>
@@ -41,74 +39,108 @@
                 <li><a href="#">Tracking Room</a></li>
                 <li><a href="#">Garage</a></li>
                 <li><a href="#">Room</a></li>
-               <!-- <li><a href="#">Room</a></li> -->
+                <li><a href="#">Room</a></li>
             </ul>
         </li>
         <li>
             <!-- First Tier Drop Down -->
-            <a href="#">Gear</a>
+            <a href="html/gear/gear.html">Gear</a>
             <ul>
                 <li><a href="#">Outboard</a></li>
                 <li><a href="#">Microphones</a></li>
                 <li><a href="#">Instruments</a></li>
             </ul>
         </li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="html/contact.html">Contact</a></li>
     </ul>
-
-
-
-
-
-
-
 </nav>
 
 
 
 
-
 <!-- Full Page Image Background Carousel Header -->
+<header id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-    <div class="slideshow" style ="height: 600px"/>
-        <img class="mySlides" src="imgs/Piano2.jpg" style="width:100%;height: 100%; ">
-        <img class="mySlides" src="imgs/bluestudio2-1.jpg" style="width:100%;height: 100%">
-        <img class="mySlides" src="imgs/guitarsorgan.jpg"style="width:100%;height: 100%">
+
+
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <!-- Navigation -->
+
+
+
+
+
+
+        <div class="item active">
+            <!-- Set the first background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('imgs/bluestudio2-1.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>Caption 1</h2>
+            </div>
+        </div>
+        <div class="item">
+            <!-- Set the second background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('imgs/guitarsorgan.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>Caption 2</h2>
+            </div>
+        </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('imgs/Piano2.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>Caption 3</h2>
+            </div>
+        </div>
+
+
     </div>
 
-    <script>
-        var myIndex = 0;
-        carousel();
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
 
-        function carousel() {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            myIndex++;
-            if (myIndex > x.length) {myIndex = 1}
-                x[myIndex-1].style.display = "block";
-            setTimeout(carousel, 4000); // Change image every 2 seconds
-        }
-    </script>
 
+
+</header>
 
 <!-- Page Content -->
-<div class="col-11">
-    <div class="col-4"> <!--FACEBOOK FEED-->
-        <h5>Facebook</h5><hr>
-        <div class = "fb-page" data-href="https://www.facebook.com/XLNTSOUND/" data-tabs="timeline" data-small-header="true" data-width="370" data-height = "300" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/XLNTSOUND/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/XLNTSOUND/">Xlntsound Productions</a></blockquote></div>
-    </div>
-    <div class="col-4"> <!--INSTAGRAM FEED-->
-        <h5>Instagram</h5><hr>
-        <iframe width="370" height="300" src="https://snapwidget.com/embed/367067" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
-    </div>
-    <div class="col-4"><!--YOUTUBE FEED-->
-        <h5>YouTube</h5><hr>
-        <iframe width="370" height="300" src="https://www.youtube.com/embed/iGSKkH2t6tw?list=PLgbYbHDoWpdUiuUnZeo6_F-0ZGaekyI23" frameborder="0" allowfullscreen style="float: left;"></iframe>
+<div class="container">
+
+    <div class="row">
+        <div class="col-4"> <!--FACEBOOK FEED-->
+            <h2>Facebook</h2><hr>
+            <div class="fb-page" data-href="https://www.facebook.com/XLNTSOUND/" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/XLNTSOUND/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/XLNTSOUND/">Xlntsound Productions</a></blockquote></div>
+
+        </div>
+        <div class="col-4"> <!--INSTAGRAM FEED-->
+            <h2>Instagram</h2><hr>
+            <iframe src="https://snapwidget.com/embed/367067" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%; "></iframe>
+        </div>
+        <div class="col-4"><!--YOUTUBE FEED-->
+            <h2>YouTube</h2><hr>
+            <h3> XLNT Tutorials</h3><hr>
+            <iframe width="385" height="200" src="https://www.youtube.com/embed/iGSKkH2t6tw?list=PLgbYbHDoWpdUiuUnZeo6_F-0ZGaekyI23" frameborder="0" allowfullscreen style="float: left;"></iframe>
+
+
+
+        </div>
+
 
     </div>
+
+
 </div>
 
 
@@ -116,35 +148,41 @@
 <!------------------------------
         FOOTER
 -------------------------------->
-<!--<div class="row">-->
-<div class = "col-9">
+<div class="row">
+    <footer class="main_footer col-12">
 
-     <p> <b>Address:</b> 228 South Mills Ave, Claremont, CA, 91711  <b> Contact:</b> xlntsound@gmail.com
-         <br>
-     </p>
-    <footer-location.ul role ="social_media" class="social-network social-circle" >
-        <footer.location.li><a href="#" class="icoSnapChat" title="SnapChat"><i class="fa fa-snapchat-ghost"></i></a></footer.location.li>
-        <footer.location.li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></footer.location.li>
-        <footer.location.li><a href="#" class="icoSoundCloud" title="SoundCloud"><i class="fa fa-soundcloud"></i></a></footer.location.li>
-    </footer-location.ul>
-    <p>Copyright &copy; XlntSound.com 2014</p>
+        <ul class="social-network social-circle" style ="padding: 10% 0%;">
+            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#" class="icoYouTube" title="YouTube"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#" class="icoSnapChat" title="SnapChat"><i class="fa fa-snapchat-ghost"></i></a></li>
+            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#" class="icoSoundCloud" title="SoundCloud"><i class="fa fa-soundcloud"></i></a></li>
+
+        </ul>
+
+        <br>
+            <h5>Address: </h5> 228 South Mills Ave, Claremont, CA, 91711 <br>
+            <h5>Contact: </h5> xlntsound@gmail.com
+            <h5>Copyright &copy; XlntSound.com 2014</h5>
+
+    </footer>
+
 
 </div>
-
-<!--</div>-->
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
-<!--Bootstrap Core JavaScript
-<script> src="js/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
 
 <!-- Script to Activate the Carousel -->
-<!--<script>
+<script>
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     });
-</script> -->
+</script>
 
 <script>
     $(function() {
@@ -161,7 +199,7 @@
 
 
 <!--INCLUDE JS SDK FOR FACEBOOK FEED -->
-<!--<div id="fb-root"></div> -->
+<div id="fb-root"></div>
 <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -169,9 +207,6 @@
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-
-
-
 
 </body>
 </html>

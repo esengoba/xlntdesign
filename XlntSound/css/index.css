@@ -4,16 +4,15 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-/*html,
+html,
 body {
     height: 100%;
 }
-/*
+
 .carousel,
 .item,
 .active {
     height: 100%;
-    margin-bottom: 60px;
 
 }
 
@@ -22,9 +21,6 @@ body {
 }
 
 /* Background images are set within the HTML using inline CSS, not here */
-
-
-
 
 .fill {
     width: 100%;

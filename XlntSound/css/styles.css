@@ -10,8 +10,6 @@ body {
     text-align:     justify;
     text-justify: inter-word;
     height: 100%;
-    padding:0;
-    margin:0;
 }
 
 /*=================================
@@ -32,51 +30,10 @@ body {
 .col-6 {width: 50%;}
 .col-7 {width: 58.33%;}
 .col-8 {width: 66.66%;}
-.col-9 {
-    width: 100%;
-    background-color: black;
-    color: white;
-    /*position: absolute;*/
-    right: 0;
-    bottom: 0;
-    left: 0;
-    /*padding: 1rem;*/
-    text-align: center;
-}
-.col-10 {
-    width: 100%;
-    background-color: #5bc0de;
-
-}
-.col-11 {width: 100%; height: 400px; background-color: rebeccapurple;
-}
-.col-12 {width: 100%;height: 600px;}
-
-h5{
-    color: white;
-    font-family: "Apple Symbols";
-
-
-}
-#slideshow {
-    display:block;
-    position: relative;
-    width: 100%;
-
-}
-#slideshow > div > img{
-    display:block;
-    width:100%;
-    max-width:100%;
-    position:absolute;
-
-}
-#slideshow > div {
-    position:relative;
-}
-
-.mySlides {display:none;}
-
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
 
 /*====================
         NAVIGATION
@@ -87,7 +44,6 @@ h5{
     display: none;
 }
 
-
 /* Giving a background-color to the nav container. */
 nav {
     font-family: 'Lato', sans-serif;
@@ -96,23 +52,20 @@ nav {
     font-size: 20px;
     z-index: 100;
     position: fixed;
-    width: 60%;
+    width: 100%;
     display: inline-block;
     text-align: center;
-    margin-left: 20%;
-    margin-right:20%;
+    padding-left: 20%;
+    padding-right:20%;
     /*padding: 0 15%;*/
-   /*background-color: rgba(0,0,0,.5);*/
+    /*background-color: rgba(0,0,0,.5);*/
 
 }
 
 
-
 .activeColor {
     background-color: rgba(0,0,0,1);
-    z-index: 100;
-    width: 100%;
-    max-height: 100px;
+
     transition: all 0.2s ease-in-out;
     }
 
@@ -136,31 +89,11 @@ nav:after {
 
 /* Removing padding, margin and "list-style" from the "ul",
  * and adding "position:reltive" */
-nav ul {
+nav ul{
     padding: 0;
     margin:  0;
     list-style: none;
     display: inline-block;
-    /*position: relative;*/
-}
-
-social ul{
-   /* float: left;*/
-   /* padding: 0;
-    margin: 0;
-    list-style: none;*/
-
-    display:inline-block;
-    list-style-type: none;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-
-    /*position: relative;*/
-}
-social li{
-    float: left;
-
 }
 
 
@@ -169,6 +102,7 @@ nav ul li {
     margin: 0px;
     padding-top: 5px;
     list-style: none;
+    display:inline-block;
     float: left;
 
 }
@@ -180,7 +114,7 @@ nav ul li li{
 
 /* Styling the links */
 nav a {
-    display:inline-block;
+    display:block;
     padding: 18px 20px;
     color:#FFF;
     font-size: 15px;
@@ -206,14 +140,13 @@ nav ul ul {
     position: absolute;
     /* has to be the same number as the "line-height" of "nav a" */
     margin-top: 4px;
-    padding: 12px 16px;/*missing padding, error causing the dropdown problem*/
     z-index: inherit;
+
 }
 
 /* Display Dropdowns on Hover */
 nav ul li:hover > ul {
-    display:block;
-
+    display:inherit;
 }
 
 /* Fisrt Tier Dropdown */
@@ -225,76 +158,29 @@ nav ul ul li {
     display:list-item;
     position: relative;
 
-
 }
 nav ul ul li:last-child, nav ul ul li:last-child a:hover{
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 
-
 }
 
-/*=======================
-        SUBTITLE
-========================*/
-
-.subtitle{
-    margin-top: 70px;
-    background-image: url("../imgs/guitarsorgan.jpg");
-    height: 100px;
-    color: white;
-    width: 100%;
-    border: 2px solid black;
-}
-
-.subtitle h2{
-    font-size: 40px;
-    padding: 4px 70px;
-}
 
 
 /*=======================
         FOOTER
 ========================*/
-.footer-location ul {
-    display:inline-block;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-
-
-
-}
-.footer-location li{
-    float: left;
-}
 .main_footer{
+    padding: 0% 20%;
+    text-align: center;
+    margin-bottom: 0%;
+    background-color: black;
     font-size: 12px;
+    height: auto ;
     color: white;
-    height: 40px;
-    display:block;
-    position: relative;
-    width: 100%;
-    padding: 1cm 1cm .5cm .5cm;
-    background-color: pink;
+    position: absolute;
 
 }
-
-.left_footer{
-    float: left;
-
-}
-
-.middle_footer{
-    text-align:  center;
-    vertical-align: middle;
-    margin: 0 auto;
-
-
-}
-
-
 
 
 
@@ -384,23 +270,23 @@ nav ul ul li:last-child, nav ul ul li:last-child a:hover{
     }
 
     /* Hide Dropdowns by Default */
-   nav ul ul {
+    nav ul ul {
         float: none;
         position:static;
         color: #ffffff;
-        /*has to be the same number as the "line-height" of "nav a"*/
+        /* has to be the same number as the "line-height" of "nav a" */
     }
 
     /* Hide menus on hover */
     nav ul ul li:hover > ul,
     nav ul li:hover > ul {
-        display: block;
+        display: none;
     }
 
-    /* First Tier Dropdown */
+    /* Fisrt Tier Dropdown */
     nav ul ul li {
         display: block;
-        /*width: 100%;*/
+        width: 100%;
     }
 
     nav ul ul ul li {
@@ -429,18 +315,16 @@ nav ul ul li:last-child, nav ul ul li:last-child a:hover{
  ==========================*/
 
 
-social-network.ul {
+ul.social-network {
     list-style: none;
     display: inline;
     margin-left: 0 !important;
     padding: 0;
-    /*float: right;*/
+
 }
-social-network.li {
+ul.social-network li {
     display: inline;
     margin: 0 5px;
-    float: left;
-
 }
 
 
@@ -516,41 +400,58 @@ a.socialIcon:hover, .socialHoverClass {
 }
 .social-circle i {
     color: #fff;
-
-
 }
 
+
 /***************************
-           LINK
+           LINK
 *************************** */
 
 .link_menu{
-        background-size: 100%;
-        height: 15vh;
-        background-blend-mode:darken;
-        background-color: rgba(0,0,0,.2);
+    background-size: 100%;
+    height: 15vh;
+    background-blend-mode:darken;
+    background-color: rgba(0,0,0,.2);
 
-        color: white;
-        width: 17%;
-        border: 2px solid black;
-        display: inline-block;
-        margin: 1%;
-        text-align: center;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    width: 17%;
+    border: 2px solid black;
+    display: inline-block;
+    margin: 1%;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 
 }
 
 
 .link_menu:hover{
-        width: 17%;
-        height: 20vh;
-        opacity: 0.8;
-        filter: alpha(opacity=80);
+    width: 17%;
+    height: 20vh;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
 }
 
 .link_menu h2{
-        font-size: 25px;
-        padding: 8% 0;
+    font-size: 25px;
+    padding: 8% 0;
 
+}
+
+/*=======================
+ -        SUBTITLE
+ ========================*/
+
+.subtitle{
+    margin-top: 70px;
+    background-image: url("../imgs/guitarsorgan.jpg");
+    height: 100px;
+    color: white;
+    width: 100%;
+    border: 2px solid black;
+}
+
+.subtitle h2{
+    font-size: 40px;
+    padding: 4px 70px;
 }
