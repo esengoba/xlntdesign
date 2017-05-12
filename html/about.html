@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="../css/index.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/flexbox.css"/>
+
+    <script src="jquery-3.2.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+<style>
+    .studio
+    {
+        float: left;
+    }
+    #staff1
+    {
+        min-height: 100%;
+        width: 100%;
+
+    }
+    .AboutStudio
+    {
+        text-align: center;
+        min-height: 100%;
+        width: 100%;
+    }
+    .Scroll
+    {
+        position: center;
+    }
+    body, html, main {
+        /* important */
+        height: 100%;
+    }
+    .cd-fixed-bg {
+        min-height: 100%;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .cd-fixed-bg.cd-bg-1 {
+        background-image: url("../imgs/bluestudio2-1.jpg");
+    }
+    .cd-fixed-bg.cd-bg-2 {
+        background-image: url("../imgs/IMG_8185.JPG.jpeg");
+    }
+    .cd-fixed-bg.cd-bg-3 {
+        background-image: url("../imgs/IMG_8159.JPG");
+    }
+    .cd-scrolling-bg {
+        min-height: 100%;
+    }
+    .words{
+        position: relative;
+        top: -20px; /*adjust this value as needed*/
+        z-index: 9999;
+        margin: 10%;
+    }
+    .StudioInfo
+    {
+        position: relative;
+        top: 150px; /*adjust this value as needed*/
+        z-index: 9999;
+        margin: 10%;
+        font-size: 15px;
+    }
+    #description
+    {
+        position: relative;
+        top: -500px;
+        z-index: 9999;
+
+    }
+    #staff2
+    {
+        position: relative;
+        top: -500px;
+        z-index: 9999;
+    }
+    #description2
+    {
+        position: relative;
+        top: 200px;
+        z-index: 9999;
+        float: left;
+    }
+    .words2
+    {
+        margin: 10%;
+    }
+</style>
+
+<body>
+
+<!------------------------------
+        NAVIGATION
+-------------------------------->
+
+<div class="row">
+    <nav class="col-12 activeColor" style="padding-left:20%;">
+        <label for="drop" class="toggle">Menu</label>
+        <input type="checkbox" id="drop"/>
+        <ul class="menu col-10">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../html/about.html">About</a></li>
+            <li><!-- First Tier Drop Down -->
+                <a href="../html/services/services.html">Services</a>
+            </li>
+            <div class="logo">Your Logo here</div>
+            <li>
+                <!-- First Tier Drop Down -->
+                <a href="../html/studio/studio.html">Studio</a>
+            </li>
+            <li>
+                <!-- First Tier Drop Down -->
+                <a href="../html/gear/gear.html">Gear</a>
+            </li>
+            <li><a href="../html/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+<!------------------------------
+        SUBTITLE
+-------------------------------->
+<div class="row">
+    <div class="col-12 subtitle"> <!--FACEBOOK FEED-->
+        <h2>ABOUT</h2>
+
+
+    </div>
+</div>
+
+
+<!------------------------------
+        PAGE CONTENT
+-------------------------------->
+
+
+<main>
+    <div class="cd-fixed-bg cd-bg-1">
+        <div class="col-4" id="studioWords">
+            <p class="StudioInfo" style="color:white;"> Xlnt sound is a professional recording studio located in the
+                heart of downtown hollywood california. featuring the best of both analog and modern
+                digital tools, we aim to make your studio experience the best it can be. music is our passion,
+                and we focus on making a big sound in an intimate setting. </p>
+        </div>
+    </div>
+
+    <div class="cd-scrolling-bg cd-color-2">
+
+    </div>
+</main>
+
+
+<img src="../imgs/IMG_8185.JPG.jpeg" id="staff1">
+<div class="col-2" id="description" style="color: white">
+    <h3 style="padding-left:30px; font-size:20px">Parker Ament</h3><br>
+    <p style="padding-left: 30px; font-size: 15px"> XIntSound owner and producer</p>
+</div>
+
+
+<main>
+    <div class="cd-fixed-bg cd-bg-3">
+
+        <div class="col-2" id="description2">
+           <!-- <h3 style="color:white;"> Maurita Ament</h3><br>
+            <p class="words2" style="color:white;"> Senior Comp Sci. Info Info Info Info Info INfo InfoMore info more info
+                info info info info info info info info info info info nifo
+            </p>
+            -->
+        </div>
+
+    </div>
+</main>
+
+
+<!------------------------------
+        FOOTER
+-------------------------------->
+<div class="row">
+    <footer class="main_footer col-12">
+        <ul class="social-network social-circle" style ="padding: 10% 0%;">
+            <li><a href="https://www.facebook.com/XLNTSOUND/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UC_WMAaRkWseHyuPJ0lJe9oA" class="icoYouTube" title="YouTube"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="https://www.instagram.com/xlntsound/" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="https://www.snapchat.com/add/xlntsound" class="icoSnapChat" title="SnapChat"><i class="fa fa-snapchat-ghost"></i></a></li>
+            <li><a href="https://twitter.com/XLNTSOUND" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://soundcloud.com/xlntsound" class="icoSoundCloud" title="SoundCloud"><i class="fa fa-soundcloud"></i></a></li>
+        </ul>
+        <br>
+        <h5>Address: </h5> 228 South Mills Ave, Claremont, CA, 91711 <br>
+        <h5>Contact: </h5> xlntsound@gmail.com
+        <h5>Copyright &copy; XlntSound.com 2014</h5>
+    </footer>
+</div>
+
+<!-- jQuery -->
+<script src="../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
